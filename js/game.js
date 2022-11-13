@@ -50,25 +50,52 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function playGame() {
-  let playerSelection = getPlayerChoice();
-  let computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
-  console.log("Player score: " + playerScore);
-  console.log("Computer score: " + computerScore);
-}
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let playerSelection = e.target.id;
+    let computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+    playerSelectionDisplay.textContent = "You have chosen: " + playerSelection;
+    computerSelectionDisplay.textContent = "The computer has chosen: " + computerSelection;
+    if (playerSelection === computerSelection) {
+      resultDisplay.textContent = "The game is a tie!";
+    } else if (playerSelection === "rock" && computerSelection === "paper") {
+      resultDisplay.textContent = "The computer won! Paper beats rock.";
+    } else if (playerSelection === "rock" && computerSelection === "scissors") {
+      resultDisplay.textContent = "You won! Rock beats scissors.";
+    } else if (playerSelection === "paper" && computerSelection === "rock") {
+      resultDisplay.textContent = "You won! Paper beats rock.";
+    } else if (playerSelection === "paper" && computerSelection === "scissors") {
+      resultDisplay.textContent = "The computer won! Scissors beats paper.";
+    } else if (playerSelection === "scissors" && computerSelection === "rock") {
+      resultDisplay.textContent = "The computer won! Rock beats scissors.";
+    } else if (playerSelection === "scissors" && computerSelection === "paper") {
+      resultDisplay.textContent = "You won! Scissors beats paper.";
+    }
+    playerScoreDisplay.textContent = "Player Score: " + playerScore;
+    computerScoreDisplay.textContent = "Computer Score: " +computerScore;
+    if (playerScore === 5) {
+      alert("You won the game!");
+      playerScore = 0;
+      computerScore = 0;
+    } else if (computerScore === 5) {
+      alert("The computer won the game!");
+      reset();
+    }
+  });
+});
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    playGame();
-  }
-  if (playerScore > computerScore) {
-    console.log("You won the game!");
-  } else if (playerScore < computerScore) {
-    console.log("The computer won the game!");
-  } else {
-    console.log("The game is a tie!");
-  }
+const resetButton = document.querySelector("#reset");
+resetButton.addEventListener("click", reset);
+function reset(){
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreDisplay.textContent = "Player Score: " + playerScore;
+  computerScoreDisplay.textContent = "Computer Score: " +computerScore;
 }
-
-game();
+const playerScoreDisplay = document.querySelector("#player-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+const playerSelectionDisplay = document.querySelector("#player-selection");
+const computerSelectionDisplay = document.querySelector("#computer-selection");
+const resultDisplay = document.querySelector("#result");
