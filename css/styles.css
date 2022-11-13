@@ -1,13 +1,14 @@
-.reset {
-  
+body {
+  background-color: blanchedalmond;
 }
 
 #reset {
-  background-color: antiquewhite;
+  background-color: #f1f1f1;
   color: slategrey;
   border-radius: 8px;
   padding: 10px;
   margin: 10px;
+  cursor: pointer;
 }
 
 #reset:hover {
@@ -22,7 +23,6 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 0 1em 0;
-
 }
 
 .choice-btn {
@@ -43,11 +43,15 @@
 }
 
 #result {
-  background-color: #fff;
+  background-color: transparent;
   color: #000;
   border-radius: 8px;
   padding: 10px;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .selections {
